@@ -13,6 +13,9 @@ class TransactionsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var itemArray = [Item]()
+    
+
+    
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
 
     override func viewDidLoad() {
@@ -30,23 +33,31 @@ class TransactionsViewController: UIViewController {
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
-        var textField = UITextField()
+        var descriptionTextField = UITextField()
+        var valueTextField = UITextField()
         
         let alert = UIAlertController(title: "Add New Todey Item", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             
-            let newItem = Item()
-            newItem.title = textField.text!
+            var newItem = Item(description: "", value: "")
+            
+            newItem.description = descriptionTextField.text!
+            newItem.value = valueTextField.text!
             
             self.itemArray.append(newItem)
             
             self.saveItems()
         }
         
-        alert.addTextField { (alertTextField) in
-            alertTextField.placeholder = "Create new item"
-            textField = alertTextField
+        alert.addTextField { (alertTextFieldDescription) in
+            alertTextFieldDescription.placeholder = "Description"
+            descriptionTextField = alertTextFieldDescription
+        }
+        
+        alert.addTextField { (alertTextFieldValue) in
+            alertTextFieldValue.placeholder = "Value"
+            valueTextField = alertTextFieldValue
         }
         
         alert.addAction(action)
@@ -100,19 +111,31 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
         
         let item = itemArray[indexPath.row]
         
-        cell.textLabel?.text = item.title
+        configureText(for: cell, with: item)
         
-        cell.accessoryType = item.done ? .checkmark : .none
+//        cell.textLabel?.text = item.title
+//
+//        cell.accessoryType = item.done ? .checkmark : .none
         
         return cell
         
     }
+    
+    func configureText(for cell:UITableViewCell, with item: Item){
+      if let toDoItemCell = cell as? SpendItemTableViewCell {
+          toDoItemCell.spendDescriptionText.text = item.description
+          toDoItemCell.spendValueText.text = item.value
+//          toDoItemCell.spendValueText.text = "£" + String(format: "%.2f", item.value)
+      }
+    }
+    
+    
 
     //MARK: - TableView Delegate Methods
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
+//        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
         saveItems()
         
@@ -122,6 +145,7 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         itemArray.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .automatic)
+        saveItems()
     }
     
     

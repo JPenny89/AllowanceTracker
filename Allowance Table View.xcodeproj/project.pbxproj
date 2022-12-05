@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63132129293E586C00B16E79 /* SpendItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63132128293E586C00B16E79 /* SpendItemTableViewCell.swift */; };
 		63BFEFEB293A4F7100BAEF32 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFEFEA293A4F7100BAEF32 /* AppDelegate.swift */; };
 		63BFEFED293A4F7100BAEF32 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFEFEC293A4F7100BAEF32 /* SceneDelegate.swift */; };
 		63BFEFEF293A4F7100BAEF32 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63BFEFEE293A4F7100BAEF32 /* TransactionsViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		63132128293E586C00B16E79 /* SpendItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendItemTableViewCell.swift; sourceTree = "<group>"; };
 		63BFEFE7293A4F7100BAEF32 /* Allowance Table View.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Allowance Table View.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		63BFEFEA293A4F7100BAEF32 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		63BFEFEC293A4F7100BAEF32 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				63BFEFEE293A4F7100BAEF32 /* TransactionsViewController.swift */,
+				63132128293E586C00B16E79 /* SpendItemTableViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -177,6 +180,7 @@
 				63BFEFEF293A4F7100BAEF32 /* TransactionsViewController.swift in Sources */,
 				63BFEFEB293A4F7100BAEF32 /* AppDelegate.swift in Sources */,
 				63BFEFED293A4F7100BAEF32 /* SceneDelegate.swift in Sources */,
+				63132129293E586C00B16E79 /* SpendItemTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
