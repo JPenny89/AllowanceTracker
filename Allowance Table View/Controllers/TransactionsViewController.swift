@@ -36,14 +36,14 @@ class TransactionsViewController: UIViewController {
         var descriptionTextField = UITextField()
         var valueTextField = UITextField()
         
-        let alert = UIAlertController(title: "Add New Todey Item", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add New Transaction", message: "", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+        let action = UIAlertAction(title: "Save", style: .default) { (action) in
             
-            var newItem = Item(description: "", value: "")
+            var newItem = Item(description: "", value: 0.0)
             
             newItem.description = descriptionTextField.text!
-            newItem.value = valueTextField.text!
+            newItem.value = Double(valueTextField.text!)!
             
             self.itemArray.append(newItem)
             
@@ -124,8 +124,8 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
     func configureText(for cell:UITableViewCell, with item: Item){
       if let toDoItemCell = cell as? SpendItemTableViewCell {
           toDoItemCell.spendDescriptionText.text = item.description
-          toDoItemCell.spendValueText.text = item.value
-//          toDoItemCell.spendValueText.text = "£" + String(format: "%.2f", item.value)
+//          toDoItemCell.spendValueText.text = item.value
+          toDoItemCell.spendValueText.text = "£" + String(format: "%.2f", item.value)
       }
     }
     

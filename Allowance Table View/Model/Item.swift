@@ -9,6 +9,6 @@ import Foundation
 
 struct Item: Codable {
     var description: String
-    var value: String
+    var value: Double
     
 }
