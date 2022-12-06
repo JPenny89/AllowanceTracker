@@ -40,7 +40,11 @@ class TransactionsViewController: UIViewController {
         
         let action = UIAlertAction(title: "Save", style: .default) { (action) in
             
+            
+            
             var newItem = Item(description: "", value: 0.0)
+            
+        
             
             newItem.description = descriptionTextField.text!
             newItem.value = Double(valueTextField.text!)!
@@ -49,6 +53,8 @@ class TransactionsViewController: UIViewController {
             
             self.saveItems()
         }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {(ACTION) in print("Cancel")}
         
         alert.addTextField { (alertTextFieldDescription) in
             alertTextFieldDescription.placeholder = "Description"
@@ -60,8 +66,9 @@ class TransactionsViewController: UIViewController {
             valueTextField = alertTextFieldValue
         }
         
+        action.isEnabled = false
         alert.addAction(action)
-        
+        alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
         
     }
@@ -113,10 +120,6 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
         
         configureText(for: cell, with: item)
         
-//        cell.textLabel?.text = item.title
-//
-//        cell.accessoryType = item.done ? .checkmark : .none
-        
         return cell
         
     }
@@ -134,10 +137,8 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
     //MARK: - TableView Delegate Methods
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
-        
-        saveItems()
+                
+//        This currently unhighlights the row once the user lifts their finger
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -150,6 +151,9 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
     
     
 }
+
+
+
 
 
 
