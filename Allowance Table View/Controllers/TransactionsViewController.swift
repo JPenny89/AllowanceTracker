@@ -22,7 +22,11 @@ class TransactionsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(dataFilePath)
+        remainingBudget.layer.borderColor = UIColor.label.cgColor
+        remainingBudget.layer.borderWidth = 1.0
+        remainingBudget.layer.cornerRadius = 8
+        remainingBudget.layer.shadowRadius = 3.0
+        
         
         loadItems()
         calculateBudget()
@@ -199,6 +203,8 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
         saveItems()
         calculateBudget()
     }
+    
+//    func tab
     
     
 }
