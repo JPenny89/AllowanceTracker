@@ -9,7 +9,8 @@ import UIKit
 
 class TransactionsViewController: UIViewController, UITextFieldDelegate {
     
-    
+    @IBOutlet weak var budgetTextField: UITextField!
+    @IBOutlet weak var remainingBudget: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     var itemArray = [Item]()
@@ -94,6 +95,12 @@ class TransactionsViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    @IBAction func calculatePressed(_ sender: UIButton) {
+        budgetTextField.resignFirstResponder()
+        calculateBudget()
+    }
+    
 
     
     
@@ -133,6 +140,12 @@ class TransactionsViewController: UIViewController, UITextFieldDelegate {
           }
         
         print("totalSpent = \(totalSpent)")
+        
+        if let text = budgetTextField.text, !text.isEmpty {
+          remainingBudget.text = "£" + String(format: "%.2f", Double(text)! - totalSpent)
+        } else {
+          remainingBudget.text = ""
+        }
       
           
     }
