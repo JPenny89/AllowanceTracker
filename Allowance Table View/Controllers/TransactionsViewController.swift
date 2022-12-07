@@ -7,13 +7,13 @@
 
 import UIKit
 
-class TransactionsViewController: UIViewController {
+class TransactionsViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBOutlet weak var tableView: UITableView!
     
     var itemArray = [Item]()
-    
+  
 
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
@@ -24,6 +24,7 @@ class TransactionsViewController: UIViewController {
         print(dataFilePath)
         
         loadItems()
+        calculateBudget()
         
     }
     
@@ -36,15 +37,30 @@ class TransactionsViewController: UIViewController {
         var descriptionTextField = UITextField()
         var valueTextField = UITextField()
         
+
+        
         let alert = UIAlertController(title: "Add New Transaction", message: "", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Save", style: .default) { (action) in
-            
+          
+//            if let value = valueTextField.text{
+//              if !value.isEmpty {
+//                action.isEnabled = false
+//                  print("First is \(value) end.")
+//              } else {
+//                  action.isEnabled = true
+//                  print("Second is \(value) end.")
+//              }
+//            }
+          
+
+        
+        let action = UIAlertAction(title: "Save", style: .default) { (action) in print("Save")
+         
+
             
             
             var newItem = Item(description: "", value: 0.0)
             
-        
             
             newItem.description = descriptionTextField.text!
             newItem.value = Double(valueTextField.text!)!
@@ -52,9 +68,11 @@ class TransactionsViewController: UIViewController {
             self.itemArray.append(newItem)
             
             self.saveItems()
+            
+            self.calculateBudget()
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {(ACTION) in print("Cancel")}
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) {(cancelAction) in print("Cancel")}
         
         alert.addTextField { (alertTextFieldDescription) in
             alertTextFieldDescription.placeholder = "Description"
@@ -65,13 +83,19 @@ class TransactionsViewController: UIViewController {
             alertTextFieldValue.placeholder = "Value"
             valueTextField = alertTextFieldValue
         }
+    
         
-        action.isEnabled = false
+ 
+        action.isEnabled = true
+        
         alert.addAction(action)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
         
     }
+    
+
+    
     
     
     //MARK: - Model Manipulation Methods
@@ -98,6 +122,19 @@ class TransactionsViewController: UIViewController {
                 print("Error decoding item array, \(error)")
             }
         }
+    }
+    
+    func calculateBudget(){
+          let spendValues = itemArray.map({(spend) -> Double in
+            return spend.value
+          })
+          let totalSpent = spendValues.reduce(0){ (total, value) -> Double in
+            return total + value
+          }
+        
+        print("totalSpent = \(totalSpent)")
+      
+          
     }
     
 }
@@ -147,10 +184,14 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
         itemArray.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .automatic)
         saveItems()
+        calculateBudget()
     }
     
     
 }
+
+
+
 
 
 
