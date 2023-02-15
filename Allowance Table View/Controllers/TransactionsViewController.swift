@@ -15,8 +15,6 @@ class TransactionsViewController: UIViewController, UITextFieldDelegate {
     
     var itemArray = [Item]()
   
-
-    
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
 
     override func viewDidLoad() {
@@ -27,43 +25,21 @@ class TransactionsViewController: UIViewController, UITextFieldDelegate {
         remainingBudget.layer.cornerRadius = 8
         remainingBudget.layer.shadowRadius = 3.0
         
-        
         loadItems()
         calculateBudget()
         
     }
     
-
     //MARK: - Add New Items
-    
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
         var descriptionTextField = UITextField()
         var valueTextField = UITextField()
         
-
-        
         let alert = UIAlertController(title: "Add New Transaction", message: "", preferredStyle: .alert)
-        
-          
-//            if let value = valueTextField.text{
-//              if !value.isEmpty {
-//                action.isEnabled = false
-//                  print("First is \(value) end.")
-//              } else {
-//                  action.isEnabled = true
-//                  print("Second is \(value) end.")
-//              }
-//            }
-          
 
-        
         let action = UIAlertAction(title: "Save", style: .default) { (action) in print("Save")
-         
-
-            
-            
             var newItem = Item(description: "", value: 0.0)
             
             
@@ -71,6 +47,8 @@ class TransactionsViewController: UIViewController, UITextFieldDelegate {
             newItem.value = Double(valueTextField.text!)!
             
             self.itemArray.append(newItem)
+            
+            
             
             self.saveItems()
             
@@ -203,9 +181,6 @@ extension TransactionsViewController: UITableViewDelegate, UITableViewDataSource
         saveItems()
         calculateBudget()
     }
-    
-//    func tab
-    
     
 }
 
